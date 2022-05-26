@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -70,7 +71,7 @@ public class User implements UserDetails {
     }
 
     public boolean isRootAccess(){
-        List<String> authorities = roles.stream().map(Role::getAuthority).toList();
+        List<String> authorities = roles.stream().map(Role::getAuthority).collect(Collectors.toList());
         return authorities.contains(Roles.ADMIN.name());
     }
 }
