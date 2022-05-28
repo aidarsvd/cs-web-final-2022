@@ -7,7 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.aidar.alatoonews.model.dto.news.NewsDto;
+import pro.aidar.alatoonews.model.entity.news.Comment;
 import pro.aidar.alatoonews.model.entity.news.News;
+import pro.aidar.alatoonews.model.entity.user.User;
 import pro.aidar.alatoonews.model.repository.news.NewsRepository;
 import pro.aidar.alatoonews.model.service.news.NewsService;
 
@@ -51,5 +53,19 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    @Override
+    public void addComment(Long newsId, User user, String comment) {
+        Optional<News> news = findById(newsId);
+        news.ifPresent(value -> {
+            value.getComments().add(
+                    Comment.builder()
+                            .comment(comment)
+                            .author(user)
+                            .build()
+            );
+            save(value);
+        });
     }
 }

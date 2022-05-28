@@ -1,24 +1,22 @@
 package pro.aidar.alatoonews.model.entity.news;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import pro.aidar.alatoonews.model.entity.user.User;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "news")
+@Table(name = "comments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class News {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,22 +24,18 @@ public class News {
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    private String title;
-
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
-    private String content;
+    private String comment;
 
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private Date date;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "news_id")
-    private List<Comment> comments = new ArrayList<>();;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User author;
 
     @PrePersist
     private void init() {
         date = new Date();
     }
+
 }

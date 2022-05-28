@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${news.getTitle()}">News</title>
+    <title>News</title>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -34,25 +34,32 @@
 </div>
 
 <div class="comments">
-    <h1 id="comment_count">25 comments:</h1>
+    <h1 id="comment_count" th:text="${news.getComments().size()} + ' comments:'">25 comments:</h1>
 
-    <div class="form" sec:authorize="isAuthenticated()">
+    <form method="post" th:action="@{/comment(news_id = ${news.getId()})}"
+          th:object="${commentDto}">
         <div class="form-group">
-            <input type="text" class="form-control" id="comment_input" aria-describedby="emailHelp"
+            <input type="text" class="form-control" id="comment_input" th:field="*{comment}"
                    placeholder="Enter comment">
-            <button id="comment_send" type="submit" class="btn btn-primary">Send</button>
+            <small class="form-text text-danger" th:each="err : ${#fields.errors('comment')}"
+                   th:text="${err}">Error</small>
         </div>
-    </div>
+        <button id="comment_send" type="submit" class="btn btn-primary">Send</button>
+    </form>
 
-    <div class="comment_card">
-        <div class="profile">
-            <img th:src="@{img/profile.png}" src="../static/img/profile.png" id="profile_avatar">
-            <div>
-                <p id="profile_data">aidarsvd</p>
-                <p id="comment_date">12.12.2022</p>
+    <div class="comment_list" th:each="comment : ${news.getComments()}">
+
+        <div class="comment_card">
+            <div class="profile">
+                <img th:src="@{img/profile.png}" src="../static/img/profile.png" id="profile_avatar">
+                <div>
+                    <p id="profile_data" th:text="${comment.getAuthor().getUsername()}">aidarsvd</p>
+                    <p id="comment_date" th:text="${comment.getDate()}">12.12.2022</p>
+                </div>
             </div>
+            <p id="comment_text" th:text="${comment.getComment()}">Comment Text</p>
         </div>
-        <p id="comment_text">Comment Text</p>
+
     </div>
 </div>
 
