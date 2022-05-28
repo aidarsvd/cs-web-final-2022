@@ -6,11 +6,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pro.aidar.alatoonews.model.dto.user.UserDto;
+import pro.aidar.alatoonews.model.entity.user.Role;
+import pro.aidar.alatoonews.model.entity.user.Roles;
 import pro.aidar.alatoonews.model.entity.user.User;
 import pro.aidar.alatoonews.model.repository.user.UserRepository;
 import pro.aidar.alatoonews.model.service.user.UserService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -23,9 +28,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(User user) {
-        log.info("Saving {} to db", user.getUsername());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveUser(UserDto userDto) {
+        log.info("Saving {} to db", userDto.getUsername());
+        User user = User.builder()
+                .name(userDto.getName())
+                .surname(userDto.getSurname())
+                .username(userDto.getUsername())
+                .email(userDto.getEmail() + "@alatoo.edu.kg")
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .roles(new ArrayList<>(Arrays.asList(new Role(null, Roles.USER))))
+                .build();
         userRepository.save(user);
     }
 
@@ -48,6 +60,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUsernameExist(String username) {
         return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean isEmailExist(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     @Override
