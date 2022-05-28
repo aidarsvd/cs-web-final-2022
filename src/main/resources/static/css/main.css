@@ -8,7 +8,7 @@ a {
 }
 
 body {
-    background-color: white;
+    background-color: #F0F0F0;
 }
 
 .news {
@@ -21,7 +21,7 @@ body {
 .news_card {
     width: 700px;
     border-radius: 14px;
-    background-color: #F0F0F0;
+    background-color: white;
     margin-top: 50px;
 }
 

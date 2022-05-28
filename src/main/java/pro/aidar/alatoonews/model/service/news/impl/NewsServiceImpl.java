@@ -12,6 +12,7 @@ import pro.aidar.alatoonews.model.repository.news.NewsRepository;
 import pro.aidar.alatoonews.model.service.news.NewsService;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,8 +34,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News findById(Long id) {
-        return null;
+    public Optional<News> findById(Long id) {
+        return newsRepository.findById(id);
     }
 
     @Override
