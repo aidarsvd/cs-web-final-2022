@@ -10,12 +10,12 @@ import pro.aidar.alatoonews.model.dto.user.UserDto;
 import pro.aidar.alatoonews.model.entity.user.Role;
 import pro.aidar.alatoonews.model.entity.user.Roles;
 import pro.aidar.alatoonews.model.entity.user.User;
+import pro.aidar.alatoonews.model.repository.user.RoleRepository;
 import pro.aidar.alatoonews.model.repository.user.UserRepository;
 import pro.aidar.alatoonews.model.service.user.UserService;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -25,6 +25,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -36,9 +37,10 @@ public class UserServiceImpl implements UserService {
                 .username(userDto.getUsername())
                 .email(userDto.getEmail() + "@alatoo.edu.kg")
                 .password(passwordEncoder.encode(userDto.getPassword()))
-                .roles(new ArrayList<>(Arrays.asList(new Role(null, Roles.USER))))
+                .roles(new ArrayList<>())
                 .build();
         userRepository.save(user);
+        assignRoleToUser(Roles.USER, userDto.getUsername());
     }
 
     @Override
@@ -65,6 +67,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isEmailExist(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public void assignRoleToUser(Roles roles, String username) {
+        Optional<Role> role = roleRepository.findByName(roles);
+        User user = userRepository.findByUsername(username);
+        if (user != null && role.isPresent()) {
+            user.getRoles().clear();
+            user.getRoles().add(role.get());
+        }
     }
 
     @Override
