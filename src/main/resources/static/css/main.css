@@ -1,0 +1,49 @@
+p {
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    background-color: white;
+}
+
+.news {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.news_card {
+    width: 700px;
+    border-radius: 14px;
+    background-color: #F0F0F0;
+    margin-top: 50px;
+}
+
+#title {
+    font-size: 28px;
+    margin-left: 24px;
+}
+
+#date {
+    margin-left: 24px;
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+
+#thumbnail {
+    width: 700px;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+    margin: 20px auto;
+}
+
+.pagination {
+    margin: 20px;
+}
