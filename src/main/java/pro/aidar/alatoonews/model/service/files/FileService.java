@@ -11,6 +11,6 @@ public interface FileService {
 
     Resource get(String filename);
 
-    boolean delete(String filename) throws MalformedURLException;
+    void delete(String filename) throws MalformedURLException;
 
 }
