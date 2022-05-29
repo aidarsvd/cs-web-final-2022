@@ -13,15 +13,28 @@
 </head>
 <body>
 
-<nav class="navbar bg-light">
+<nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Ala-Too News</a>
-        <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Sign in</a>
-        </div>
-        <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-1" th:action="@{/logout}" method="post">
-            <button class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-        </form>
+        <class class="nav justify-content-end">
+            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-success">Sign out</button>
+            </form>
+            <div sec:authorize="isAnonymous()" class="form-inline">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Sign in</a>
+            </div>
+
+            <a th:href="@{/profile/{id}(id = ${user.getId()})}" id="nav_profile_avatar" th:if="${user != null}">
+                <div class="avatar">
+                    <div class="stub" th:if="${user.getUrlAvatar() == null}">
+                        <p id="avatar_stub" th:text="${#strings.substring(user.getName(), 0, 1)}">A</p>
+                    </div>
+                    <img id="profile_avatar" th:src="${user.getUrlAvatar()}"
+                         th:if="${user.getUrlAvatar() != null}">
+                </div>
+            </a>
+
+        </class>
     </div>
 </nav>
 

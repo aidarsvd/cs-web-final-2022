@@ -27,13 +27,18 @@ public class NewsController {
     @GetMapping
     public String mainPage(
             @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-            Model model
+            Model model,
+            Principal principal
     ) {
         NewsDto newsDto = newsService.findAll(page);
         model.addAttribute("news", newsDto.getNews());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", newsDto.getTotalPages());
-        if (page > newsDto.getTotalPages()) {
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            model.addAttribute("user", user);
+        }
+        if (page != 1 && page > newsDto.getTotalPages()) {
             return "not_found";
         }
         return "index";
@@ -57,10 +62,10 @@ public class NewsController {
             BindingResult bindingResult,
             Principal principal
     ) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "redirect:/" + news_id + "?error=true";
         }
-        User user = userService.findBuUsername(principal.getName());
+        User user = userService.findByUsername(principal.getName());
         newsService.addComment(news_id, user, commentDto.getComment());
         return "redirect:/" + news_id;
     }
