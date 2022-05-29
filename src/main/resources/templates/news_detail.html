@@ -38,10 +38,10 @@
     </div>
 </nav>
 
-<img id="thumbnail" th:if="${news.getThumbnail()} != null" th:src="${news.getThumbnail()}">
+<img id="thumbnail" th:if="${news.getThumbnailUrl()} != null" th:src="${news.getThumbnailUrl()}">
 
 <div class="content">
-    <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/{id}(id = ${news.getId()})}">
+    <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/admin/delete_news/{id}(id = ${news.getId()})}">
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
     <h1 id="title" th:text="${news.getTitle()}">Title</h1>

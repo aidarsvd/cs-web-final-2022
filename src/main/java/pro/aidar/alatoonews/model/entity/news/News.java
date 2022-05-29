@@ -41,14 +41,14 @@ public class News {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "news_id")
-    private List<Comment> comments = new ArrayList<>();;
+    private List<Comment> comments = new ArrayList<>();
 
     @PrePersist
     private void init() {
         date = new Date();
     }
 
-    public String getThumbnail() {
+    public String getThumbnailUrl() {
         return ResponseUtils.getImageUrl(thumbnail);
     }
 }
