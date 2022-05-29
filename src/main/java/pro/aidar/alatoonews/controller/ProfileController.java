@@ -30,7 +30,7 @@ public class ProfileController {
         if (principal == null) {
             model.addAttribute("is_my_page", false);
         } else {
-            myId = userService.findBuUsername(principal.getName()).getId();
+            myId = userService.findByUsername(principal.getName()).getId();
         }
         if (user.isPresent()) {
             model.addAttribute("is_my_page", myId.equals(user.get().getId()));

@@ -13,21 +13,37 @@
 <link rel="stylesheet" href="../static/css/news_detail.css" th:href="@{/css/news_detail.css}">
 <body>
 
-<nav class="navbar bg-light">
+<nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Ala-Too News</a>
-        <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Sign in</a>
-        </div>
-        <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-1" th:action="@{/logout}" method="post">
-            <button class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-        </form>
+        <class class="nav justify-content-end">
+            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+                  method="post">
+                <button class="btn btn-outline-success">Sign out</button>
+            </form>
+            <div sec:authorize="isAnonymous()" class="form-inline">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Sign in</a>
+            </div>
+
+            <a th:href="@{/profile/{id}(id = ${user.getId()})}" id="nav_profile_avatar" th:if="${user != null}">
+                <div class="nav_avatar">
+                    <div class="nav_stub" th:if="${user.getUrlAvatar() == null}">
+                        <p id="nav_avatar_stub" th:text="${#strings.substring(user.getName(), 0, 1)}">A</p>
+                    </div>
+                    <img id="nav_profile_avatar" th:src="${user.getUrlAvatar()}"
+                         th:if="${user.getUrlAvatar() != null}">
+                </div>
+            </a>
+        </class>
     </div>
 </nav>
 
-<img id="thumbnail" th:if="${news.getThumbnail()} != null" th:src="${news.getThumbnail()}">
+<img id="thumbnail" th:if="${news.getThumbnailUrl()} != null" th:src="${news.getThumbnailUrl()}">
 
 <div class="content">
+    <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/admin/delete_news/{id}(id = ${news.getId()})}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
     <h1 id="title" th:text="${news.getTitle()}">Title</h1>
     <p id="date" th:text="${news.getDate()}">10.10.2022</p>
     <p id="content_text" th:text="${news.getContent()}">Text</p>
@@ -63,6 +79,14 @@
                     <a th:href="@{/profile/{id}(id = ${comment.getAuthor().getId()})}" id="profile_data"
                        th:text="${comment.getAuthor().getUsername()}">aidarsvd</a>
                     <p id="comment_date" th:text="${comment.getDate()}">12.12.2022</p>
+                </div>
+                <div th:if="${user} != null" class="delete">
+                    <form class="form-inline my-2 my-lg-0"
+                          th:if="${user.getId()} == ${comment.getAuthor().getId()}"
+                          th:action="@{/comment/{id}(id = ${comment.getId()}, news_id = ${news.getId()})}"
+                          th:method="delete">
+                        <button class="btn btn-outline-danger mx-3">Delete comment</button>
+                    </form>
                 </div>
             </div>
             <p id="comment_text" th:text="${comment.getComment()}">Comment Text</p>

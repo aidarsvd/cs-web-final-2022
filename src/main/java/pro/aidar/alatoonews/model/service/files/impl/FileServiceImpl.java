@@ -65,8 +65,6 @@ public class FileServiceImpl implements FileService {
             if (resource.exists()) {
                 resource.getFile().delete();
             }
-        } catch (MalformedURLException ex) {
-            throw new RuntimeException("File not found " + filename, ex);
         } catch (IOException e) {
             throw new RuntimeException("File not found " + filename);
         }
