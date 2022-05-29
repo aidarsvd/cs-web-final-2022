@@ -17,10 +17,10 @@
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Ala-Too News</a>
         <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Войти</a>
+            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Sign in</a>
         </div>
         <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-1" th:action="@{/logout}" method="post">
-            <button class="btn btn-outline-success my-2 my-sm-0">Выйти</button>
+            <button class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
         </form>
     </div>
 </nav>
@@ -37,12 +37,11 @@
     <h1 id="comment_count" th:text="${news.getComments().size()} + ' comments:'">25 comments:</h1>
 
     <form method="post" th:action="@{/comment(news_id = ${news.getId()})}"
-          th:object="${commentDto}">
+          th:object="${commentDto}" sec:authorize="isAuthenticated()">
         <div class="form-group">
             <input type="text" class="form-control" id="comment_input" th:field="*{comment}"
                    placeholder="Enter comment">
-            <small class="form-text text-danger" th:each="err : ${#fields.errors('comment')}"
-                   th:text="${err}">Error</small>
+            <small class="form-text text-danger" th:if="${param.error != null}">Error</small>
         </div>
         <button id="comment_send" type="submit" class="btn btn-primary">Send</button>
     </form>
@@ -53,7 +52,7 @@
             <div class="profile">
                 <img th:src="@{img/profile.png}" src="../static/img/profile.png" id="profile_avatar">
                 <div>
-                    <p id="profile_data" th:text="${comment.getAuthor().getUsername()}">aidarsvd</p>
+                    <a th:href="@{/profile/{id}(id = ${comment.getAuthor().getId()})}" id="profile_data" th:text="${comment.getAuthor().getUsername()}">aidarsvd</a>
                     <p id="comment_date" th:text="${comment.getDate()}">12.12.2022</p>
                 </div>
             </div>

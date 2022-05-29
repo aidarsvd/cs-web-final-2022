@@ -3,6 +3,7 @@ package pro.aidar.alatoonews.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pro.aidar.alatoonews.model.dto.news.CommentDto;
 import pro.aidar.alatoonews.model.dto.news.NewsDto;
@@ -53,7 +54,12 @@ public class NewsController {
     public String postComment(
             @RequestParam Long news_id,
             @Valid @ModelAttribute("item") CommentDto commentDto,
-            Principal principal) {
+            BindingResult bindingResult,
+            Principal principal
+    ) {
+        if (bindingResult.hasErrors()){
+            return "redirect:/" + news_id + "?error=true";
+        }
         User user = userService.findBuUsername(principal.getName());
         newsService.addComment(news_id, user, commentDto.getComment());
         return "redirect:/" + news_id;
