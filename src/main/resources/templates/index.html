@@ -43,6 +43,9 @@
         <img id="thumbnail" th:if="${item.getThumbnail()} != null" th:src="${item.getThumbnail()}">
         <p id="title" th:text="${item.getTitle()}">Test</p>
         <p id="date" th:text="${item.getDate()}">10.10.2022</p>
+        <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/{id}(id = ${item.getId()})}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </a>
 </div>
 
