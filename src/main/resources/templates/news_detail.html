@@ -25,7 +25,7 @@
     </div>
 </nav>
 
-<img id="thumbnail" th:src="@{img/logo.png}" src="../static/img/logo.png" alt="../static/img/logo.png">
+<img id="thumbnail" th:if="${news.getThumbnail()} != null" th:src="${news.getThumbnail()}">
 
 <div class="content">
     <h1 id="title" th:text="${news.getTitle()}">Title</h1>

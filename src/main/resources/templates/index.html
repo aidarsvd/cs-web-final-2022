@@ -27,7 +27,7 @@
 
 <div class="news" th:each="item : ${news}">
     <a class="news_card" th:href="@{/{id}(id = ${item.id})}">
-        <img id="thumbnail" th:src="@{img/logo.png}" src="../static/img/logo.png" alt="../static/img/logo.png">
+        <img id="thumbnail" th:if="${item.getThumbnail()} != null" th:src="${item.getThumbnail()}">
         <p id="title" th:text="${item.getTitle()}">Test</p>
         <p id="date" th:text="${item.getDate()}">10.10.2022</p>
     </a>

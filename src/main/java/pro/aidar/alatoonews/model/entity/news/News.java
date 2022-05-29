@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import pro.aidar.alatoonews.utils.ResponseUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class News {
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private Date date;
 
+    private String thumbnail;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "news_id")
     private List<Comment> comments = new ArrayList<>();;
@@ -43,5 +46,9 @@ public class News {
     @PrePersist
     private void init() {
         date = new Date();
+    }
+
+    public String getThumbnail() {
+        return ResponseUtils.getImageUrl(thumbnail);
     }
 }
