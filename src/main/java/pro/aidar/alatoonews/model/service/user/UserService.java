@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface UserService extends UserDetailsService {
     void saveUser(UserDto user);
 
+    User findBuUsername(String username);
+
     Optional<User> findById(Long id);
 
     User updateUser(User user);

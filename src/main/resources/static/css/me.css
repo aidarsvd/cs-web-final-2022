@@ -1,0 +1,55 @@
+body {
+    background-color: #F0F0F0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    background-color: white;
+    width: 60%;
+    border-radius: 16px;
+    margin-top: 50px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: center;
+}
+
+#profile_avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#upload{
+    margin-top: 24px;
+}
+
+.stub {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avatar_stub{
+    color: white;
+    font-weight: bold;
+    font-size: 54px;
+}
+
+.profile_data{
+    margin-left: 24px;
+}
