@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pro.aidar.alatoonews.utils.ResponseUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,6 +31,10 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String avatar;
+
+    public String getAvatar() {
+        return ResponseUtils.getImageUrl(avatar);
+    }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})

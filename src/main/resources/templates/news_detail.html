@@ -50,9 +50,18 @@
 
         <div class="comment_card">
             <div class="profile">
-                <img th:src="@{img/profile.png}" src="../static/img/profile.png" id="profile_avatar">
+
+                <div class="avatar">
+                    <div class="stub" th:if="${comment.getAuthor().getAvatar() == null}">
+                        <p id="avatar_stub" th:text="${#strings.substring(comment.getAuthor().getName(), 0, 1)}">A</p>
+                    </div>
+                    <img id="profile_avatar" th:src="${comment.getAuthor().getAvatar()}"
+                         th:if="${comment.getAuthor().getAvatar() != null}">
+                </div>
+
                 <div>
-                    <a th:href="@{/profile/{id}(id = ${comment.getAuthor().getId()})}" id="profile_data" th:text="${comment.getAuthor().getUsername()}">aidarsvd</a>
+                    <a th:href="@{/profile/{id}(id = ${comment.getAuthor().getId()})}" id="profile_data"
+                       th:text="${comment.getAuthor().getUsername()}">aidarsvd</a>
                     <p id="comment_date" th:text="${comment.getDate()}">12.12.2022</p>
                 </div>
             </div>
