@@ -52,11 +52,11 @@
             <div class="profile">
 
                 <div class="avatar">
-                    <div class="stub" th:if="${comment.getAuthor().getAvatar() == null}">
+                    <div class="stub" th:if="${comment.getAuthor().getUrlAvatar() == null}">
                         <p id="avatar_stub" th:text="${#strings.substring(comment.getAuthor().getName(), 0, 1)}">A</p>
                     </div>
-                    <img id="profile_avatar" th:src="${comment.getAuthor().getAvatar()}"
-                         th:if="${comment.getAuthor().getAvatar() != null}">
+                    <img id="profile_avatar" th:src="${comment.getAuthor().getUrlAvatar()}"
+                         th:if="${comment.getAuthor().getUrlAvatar() != null}">
                 </div>
 
                 <div>

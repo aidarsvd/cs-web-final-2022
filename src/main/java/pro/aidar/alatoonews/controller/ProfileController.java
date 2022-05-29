@@ -12,6 +12,7 @@ import pro.aidar.alatoonews.model.entity.user.User;
 import pro.aidar.alatoonews.model.service.files.FileService;
 import pro.aidar.alatoonews.model.service.user.UserService;
 
+import java.net.MalformedURLException;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -42,11 +43,14 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/{id}")
-    public String updatePhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+    public String updatePhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws MalformedURLException {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             if (file.isEmpty()){
                 return "redirect:/profile/" + id + "?error=true";
+            }
+            if (user.get().getAvatar() != null){
+                fileService.delete(user.get().getAvatar());
             }
             String image = fileService.save(file);
             user.get().setAvatar(image);

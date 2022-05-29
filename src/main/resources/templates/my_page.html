@@ -29,10 +29,10 @@
 <div class="container">
 
     <div class="avatar">
-        <div class="stub" th:if="${user.getAvatar() == null}">
+        <div class="stub" th:if="${user.getUrlAvatar() == null}">
             <p id="avatar_stub" th:text="${stub}">A</p>
         </div>
-        <img id="profile_avatar" th:src="${user.getAvatar()}" th:if="${user.getAvatar() != null}">
+        <img id="profile_avatar" th:src="${user.getUrlAvatar()}" th:if="${user.getAvatar() != null}">
     </div>
 
     <div class="profile_data">
