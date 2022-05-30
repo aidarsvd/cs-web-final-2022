@@ -26,7 +26,7 @@ public class Comment {
     @Type(type = "org.hibernate.type.TextType")
     private String comment;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @OneToOne

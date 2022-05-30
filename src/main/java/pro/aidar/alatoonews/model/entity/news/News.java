@@ -33,8 +33,7 @@ public class News {
     @Type(type = "org.hibernate.type.TextType")
     private String content;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     private String thumbnail;

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pro.aidar.alatoonews.model.dto.news.NewsDto;
 import pro.aidar.alatoonews.model.entity.news.Comment;
@@ -27,7 +28,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsDto findAll(int page) {
         NewsDto newsDto = new NewsDto();
-        Pageable pageable = PageRequest.of(page - 1, 10);
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("date").descending());
         Page<News> newsPaged = newsRepository.findAll(pageable);
         newsDto.setPage(page);
         newsDto.setTotalPages(newsPaged.getTotalPages());

@@ -83,15 +83,20 @@ public class NewsController {
             @RequestParam Long news_id,
             @PathVariable Long id,
             Principal principal
-    ){
+    ) {
         User user = userService.findByUsername(principal.getName());
-        if (user != null){
+        if (user != null) {
             commentService.getById(id).ifPresent(value -> {
-                if (value.getAuthor().getId().equals(user.getId())){
+                if (value.getAuthor().getId().equals(user.getId())) {
                     commentService.deleteById(id);
                 }
             });
         }
         return "redirect:/" + news_id;
+    }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
     }
 }
