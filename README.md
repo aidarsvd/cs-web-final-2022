@@ -7,3 +7,25 @@ App url: https://alatoo-news.herokuapp.com/
 
 ## News detail page
 <img width="1440" alt="Screen Shot 2022-05-30 at 21 59 49" src="https://user-images.githubusercontent.com/50268957/171194791-7dcc072b-e800-42a2-9083-8c31e65ef074.png">
+
+## News comment section
+<img width="1440" alt="Screen Shot 2022-05-30 at 21 59 57" src="https://user-images.githubusercontent.com/50268957/171197440-54c1f49b-b1a0-40c7-845c-20f290632856.png">
+
+## My profile page
+<img width="1440" alt="Screen Shot 2022-05-30 at 22 01 25" src="https://user-images.githubusercontent.com/50268957/171197538-db3e96b4-80d7-413c-a6d6-19aaf35d20cb.png">
+
+## User profile page
+<img width="1440" alt="Screen Shot 2022-05-31 at 20 26 19" src="https://user-images.githubusercontent.com/50268957/171197685-782c3c75-dc34-4223-a9e3-904c4ae20b14.png">
+
+## Login page
+<img width="1440" alt="Screen Shot 2022-05-30 at 22 00 48" src="https://user-images.githubusercontent.com/50268957/171197783-4af1d593-2224-441d-9c45-1b7bb5a4cf9f.png">
+
+## Sign up page
+<img width="1440" alt="Screen Shot 2022-05-30 at 22 00 57" src="https://user-images.githubusercontent.com/50268957/171198130-9e0af9a9-9592-4367-a90f-0368ab68aeed.png">
+
+## Button for adding news only for user with 'ADMIN' authority
+<img width="348" alt="Screen Shot 2022-05-30 at 22 01 48" src="https://user-images.githubusercontent.com/50268957/171198263-06566389-da24-4936-8485-6cdced10afd6.png">
+
+## News adding
+<img width="1440" alt="Screen Shot 2022-05-30 at 22 02 00" src="https://user-images.githubusercontent.com/50268957/171198512-acd39ada-d3a3-4951-9ee9-01dd9f75a2e0.png">
+
