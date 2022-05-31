@@ -30,3 +30,5 @@ App url: https://alatoo-news.herokuapp.com/
 <img width="1440" alt="Screen Shot 2022-05-30 at 22 02 00" src="https://user-images.githubusercontent.com/50268957/171198512-acd39ada-d3a3-4951-9ee9-01dd9f75a2e0.png">
 
 
+## Database diagram
+![Untitled drawio (1)](https://user-images.githubusercontent.com/50268957/171206921-482600af-dbea-42a5-bb5b-c8dadcc9b2b1.png)
