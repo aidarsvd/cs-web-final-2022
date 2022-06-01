@@ -64,6 +64,24 @@ public class NewsController {
         return "not_found";
     }
 
+    @PostMapping("/like/{id}")
+    public String like(
+            @PathVariable Long id,
+            Principal principal
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        Optional<News> news = newsService.findById(id);
+        if (news.isPresent()) {
+            if (news.get().isLiked(user.getId())) {
+                news.get().getLikedUsers().remove(user);
+            } else {
+                news.get().getLikedUsers().add(user);
+            }
+            newsService.update(news.get());
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/comment")
     public String postComment(
             @RequestParam Long news_id,
