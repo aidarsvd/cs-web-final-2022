@@ -48,18 +48,18 @@
             <p id="title" th:text="${item.getTitle()}">Test</p>
             <p id="date" th:text="${item.getDate()}">10.10.2022</p>
         </a>
-        <div class="news_options">
-            <form method="post">
-                <button class="like_btn" type="submit">
-                    <img id="like_icon" src="../static/img/heart-fill.svg"/>
-                    <p id="like_count">123</p>
-                </button>
-            </form>
-            <a class="comment_section">
-                <img id="comment_icon" src="../static/img/chat-dots.svg">
-                <p id="comment_count">123</p>
-            </a>
-        </div>
+        <p id="like_count" th:text="${item.getLikedUsers().size()} + ' likes'">1234 likes</p>
+        <form th:action="@{/like/{id}(id = ${item.getId()})}">
+            <button type="submit" class="btn btn-outline-danger my-2"
+                    th:class="${item.isLiked(userId)} ? 'btn btn-danger my-2' : 'btn btn-outline-danger my-2'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                     viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                </svg>
+            </button>
+        </form>
+
         <form sec:authorize="hasAuthority('ADMIN')" th:method="delete"
               th:action="@{/admin/delete_news/{id}(id = ${item.getId()})}">
             <button type="submit" class="btn btn-danger">Delete</button>

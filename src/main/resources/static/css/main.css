@@ -31,38 +31,8 @@ body {
     align-items: center;
 }
 
-.like_btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    border: none;
-}
-
-.comment_section {
-    padding: 20px;
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#comment_count{
-    margin-left: 8px;
-}
-
-#comment_icon{
-    width: 26px;
-    height: 26px;
-}
-
-#like_icon {
-    width: 26px;
-    height: 26px;
-}
-
-#like_count {
-    margin-left: 8px;
+#like_count{
+    margin-top: 10px;
 }
 
 #title {

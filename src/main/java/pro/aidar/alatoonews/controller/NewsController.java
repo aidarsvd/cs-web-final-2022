@@ -41,6 +41,7 @@ public class NewsController {
         if (principal != null) {
             User user = userService.findByUsername(principal.getName());
             model.addAttribute("user", user);
+            model.addAttribute("userId", user.getId());
         }
         if (page != 1 && page > newsDto.getTotalPages()) {
             return "not_found";
