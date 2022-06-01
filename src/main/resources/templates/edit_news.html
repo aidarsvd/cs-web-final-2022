@@ -44,11 +44,11 @@
         <form method="post" enctype="multipart/form-data" th:action="@{/admin/edit/{id}(id = ${news.getId()})}">
             <div class="mb-3">
                 <label class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" required>
+                <input type="text" class="form-control" name="title" th:value="${news.getTitle()}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Content</label>
-                <textarea class="form-control" rows="3" name="content" required></textarea>
+                <textarea class="form-control" rows="3" name="content" th:text="${news.getContent()}" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Set thumbnail</label>

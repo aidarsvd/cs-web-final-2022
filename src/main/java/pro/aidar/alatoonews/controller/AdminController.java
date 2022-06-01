@@ -72,16 +72,16 @@ public class AdminController {
             @RequestParam String title,
             @RequestParam String content
     ) {
-        News news = News.builder()
-                .id(id)
-                .title(title)
-                .content(content)
-                .build();
-        if (!thumbnail.isEmpty()) {
-            String image = fileService.save(thumbnail);
-            news.setThumbnail(image);
+        Optional<News> news = newsService.findById(id);
+        if (news.isPresent()){
+            news.get().setTitle(title);
+            news.get().setContent(content);
+            if (!thumbnail.isEmpty()) {
+                String image = fileService.save(thumbnail);
+                news.get().setThumbnail(image);
+            }
+            newsService.update(news.get());
         }
-        newsService.update(news);
         return "redirect:/";
     }
 
