@@ -21,6 +21,11 @@ public class AdminController {
         return "add_news";
     }
 
+    @GetMapping
+    public String editNews() {
+        return "edit_news";
+    }
+
     @PostMapping("/create_news")
     public String create(
             @RequestParam MultipartFile thumbnail,
