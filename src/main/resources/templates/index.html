@@ -17,7 +17,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Ala-Too News</a>
         <class class="nav justify-content-end">
-            <form sec:authorize="isAuthenticated()" class="form-inline mx-2 my-lg-0" th:action="@{/logout}" method="post">
+            <form sec:authorize="isAuthenticated()" class="form-inline mx-2 my-lg-0" th:action="@{/logout}"
+                  method="post">
                 <button class="btn btn-outline-success">Sign out</button>
             </form>
             <div sec:authorize="isAnonymous()" class="form-inline">
@@ -41,17 +42,32 @@
 </nav>
 
 <div class="news" th:each="item : ${news}">
-    <a class="news_card" th:href="@{/{id}(id = ${item.id})}">
-        <img id="thumbnail" th:if="${item.getThumbnailUrl()} != null" th:src="${item.getThumbnailUrl()}">
-        <p id="title" th:text="${item.getTitle()}">Test</p>
-        <p id="date" th:text="${item.getDate()}">10.10.2022</p>
-        <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/admin/delete_news/{id}(id = ${item.getId()})}">
+    <div class="news_card">
+        <a th:href="@{/{id}(id = ${item.id})}">
+            <img id="thumbnail" th:if="${item.getThumbnailUrl()} != null" th:src="${item.getThumbnailUrl()}">
+            <p id="title" th:text="${item.getTitle()}">Test</p>
+            <p id="date" th:text="${item.getDate()}">10.10.2022</p>
+        </a>
+        <div class="news_options">
+            <form method="post">
+                <button class="like_btn" type="submit">
+                    <img id="like_icon" src="../static/img/heart-fill.svg"/>
+                    <p id="like_count">123</p>
+                </button>
+            </form>
+            <a class="comment_section">
+                <img id="comment_icon" src="../static/img/chat-dots.svg">
+                <p id="comment_count">123</p>
+            </a>
+        </div>
+        <form sec:authorize="hasAuthority('ADMIN')" th:method="delete"
+              th:action="@{/admin/delete_news/{id}(id = ${item.getId()})}">
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
         <form sec:authorize="hasAuthority('ADMIN')" method="get" th:action="@{/admin/edit/{id}(id = ${item.getId()})}">
             <button type="submit" class="btn btn-primary my-2">Edit</button>
         </form>
-    </a>
+    </div>
 </div>
 
 <ul class="pagination" th:if="${totalPages > 1}">
