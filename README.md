@@ -39,7 +39,8 @@ App url: https://alatoo-news.herokuapp.com/
 
 
 ## Database diagram
-![Untitled drawio (1)](https://user-images.githubusercontent.com/50268957/171206921-482600af-dbea-42a5-bb5b-c8dadcc9b2b1.png)
+![erd drawio](https://user-images.githubusercontent.com/73548162/171475685-f8310f7a-0262-438b-a139-ec4a33698bfa.png)
+
 
 ### Currently there are 2 contributors for this repository.
 <a href="https://github.com/aidarsvd/cs-web-final-2022/graphs/contributors">
