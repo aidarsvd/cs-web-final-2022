@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pro.aidar.alatoonews.model.entity.news.News;
 import pro.aidar.alatoonews.utils.ResponseUtils;
 
 import javax.persistence.*;
@@ -36,9 +37,45 @@ public class User implements UserDetails {
         return ResponseUtils.getImageUrl(avatar);
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-    @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            }
+    )
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "role_id")
+            }
+    )
     private Collection<Role> roles = new ArrayList<>();
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            }
+    )
+    @JoinTable(
+            name = "news_likes",
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "news_id")
+            }
+    )
+    private Collection<News> likedPosts = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -73,10 +110,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public boolean isRootAccess(){
-        List<String> authorities = roles.stream().map(Role::getAuthority).collect(Collectors.toList());
-        return authorities.contains(Roles.ADMIN.name());
     }
 }

@@ -53,6 +53,21 @@
 </div>
 
 <div class="comments">
+
+    <div class="like_section">
+        <form th:action="@{/like/{id}(id = ${news.getId()}, detail = true)}" method="post" sec:authorize="isAuthenticated()">
+            <button type="submit" class="btn btn-outline-danger my-2"
+                    th:class="${news.isLiked(userId)} ? 'btn btn-danger my-2 me-2' : 'btn btn-outline-danger my-2 me-2'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                     viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                </svg>
+            </button>
+        </form>
+        <h1 id="like_count" th:text="${news.getLikedUsers().size()} + ' likes'">1234 likes</h1>
+    </div>
+
     <h1 id="comment_count" th:text="${news.getComments().size()} + ' comments:'">25 comments:</h1>
 
     <form method="post" th:action="@{/comment(news_id = ${news.getId()})}"

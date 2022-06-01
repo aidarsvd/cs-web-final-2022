@@ -41,6 +41,7 @@ public class NewsController {
         if (principal != null) {
             User user = userService.findByUsername(principal.getName());
             model.addAttribute("user", user);
+            model.addAttribute("userId", user.getId());
         }
         if (page != 1 && page > newsDto.getTotalPages()) {
             return "not_found";
@@ -57,10 +58,36 @@ public class NewsController {
             if (principal != null) {
                 User user = userService.findByUsername(principal.getName());
                 model.addAttribute("user", user);
+                model.addAttribute("userId", user.getId());
             }
             return "news_detail";
         }
         return "not_found";
+    }
+
+    @PostMapping("/like/{id}")
+    public String like(
+            @PathVariable Long id,
+            @RequestParam(name = "detail", required = false, defaultValue = "false") boolean detail,
+            Principal principal
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        Optional<News> news = newsService.findById(id);
+        if (news.isPresent()) {
+            if (news.get().isLiked(user.getId())) {
+                news.get().getLikedUsers().remove(user);
+            } else {
+                news.get().getLikedUsers().add(user);
+            }
+            newsService.update(news.get());
+        } else {
+            return "not_found";
+        }
+        if (detail) {
+            return "redirect:/" + id;
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/comment")
@@ -93,10 +120,5 @@ public class NewsController {
             });
         }
         return "redirect:/" + news_id;
-    }
-
-    @GetMapping("/ping")
-    public String ping() {
-        return "pong";
     }
 }

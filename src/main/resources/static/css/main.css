@@ -26,6 +26,16 @@ body {
     padding: 24px;
 }
 
+.news_options {
+    display: flex;
+    align-items: center;
+}
+
+.like_section{
+    display: flex;
+    align-items: center;
+}
+
 #title {
     font-size: 28px;
 }
@@ -46,7 +56,7 @@ body {
 }
 
 
-.avatar{
+.avatar {
     width: 38px;
     height: 38px;
     margin: auto 14px;
@@ -64,13 +74,13 @@ body {
     align-items: center;
 }
 
-#avatar_stub{
+#avatar_stub {
     color: white;
     font-weight: bold;
     font-size: 16px;
 }
 
-#profile_avatar{
+#profile_avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
