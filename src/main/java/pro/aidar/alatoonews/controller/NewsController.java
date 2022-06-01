@@ -58,6 +58,7 @@ public class NewsController {
             if (principal != null) {
                 User user = userService.findByUsername(principal.getName());
                 model.addAttribute("user", user);
+                model.addAttribute("userId", user.getId());
             }
             return "news_detail";
         }
@@ -67,6 +68,7 @@ public class NewsController {
     @PostMapping("/like/{id}")
     public String like(
             @PathVariable Long id,
+            @RequestParam(name = "detail", required = false, defaultValue = "false") boolean detail,
             Principal principal
     ) {
         User user = userService.findByUsername(principal.getName());
@@ -78,8 +80,14 @@ public class NewsController {
                 news.get().getLikedUsers().add(user);
             }
             newsService.update(news.get());
+        } else {
+            return "not_found";
         }
-        return "redirect:/";
+        if (detail) {
+            return "redirect:/" + id;
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/comment")
@@ -112,10 +120,5 @@ public class NewsController {
             });
         }
         return "redirect:/" + news_id;
-    }
-
-    @GetMapping("/ping")
-    public String ping() {
-        return "pong";
     }
 }

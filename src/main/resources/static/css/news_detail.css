@@ -2,6 +2,10 @@ p {
     margin-bottom: 0;
 }
 
+h1 {
+    margin-bottom: 0;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -41,6 +45,11 @@ body {
 
 #comment_count {
     font-size: 22px;
+    margin-top: 12px;
+}
+
+#like_count {
+    font-size: 22px;
 }
 
 .comments {
@@ -50,7 +59,7 @@ body {
     padding: 16px;
 }
 
-#comment_send{
+#comment_send {
     margin-top: 16px;
 }
 
@@ -65,7 +74,7 @@ body {
     align-items: center;
 }
 
-.avatar{
+.avatar {
     width: 42px;
     height: 42px;
     margin-right: 14px;
@@ -83,13 +92,13 @@ body {
     align-items: center;
 }
 
-#avatar_stub{
+#avatar_stub {
     color: white;
     font-weight: bold;
     font-size: 18px;
 }
 
-#profile_avatar{
+#profile_avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -99,11 +108,15 @@ body {
     font-size: 12px;
 }
 
+.like_section {
+    display: flex;
+    align-items: center;
+}
 
 /* Navbar avatar */
 
 
-.nav_avatar{
+.nav_avatar {
     width: 38px;
     height: 38px;
     margin: auto 14px;
@@ -121,13 +134,13 @@ body {
     align-items: center;
 }
 
-#nav_avatar_stub{
+#nav_avatar_stub {
     color: white;
     font-weight: bold;
     font-size: 16px;
 }
 
-#nav_profile_avatar{
+#nav_profile_avatar {
     height: 100%;
     object-fit: cover;
 }

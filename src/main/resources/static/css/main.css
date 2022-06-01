@@ -31,8 +31,9 @@ body {
     align-items: center;
 }
 
-#like_count{
-    margin-top: 10px;
+.like_section{
+    display: flex;
+    align-items: center;
 }
 
 #title {
