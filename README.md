@@ -23,10 +23,15 @@ App url: https://alatoo-news.herokuapp.com/
 ## Sign up page
 <img width="1440" alt="Screen Shot 2022-05-30 at 22 00 57" src="https://user-images.githubusercontent.com/50268957/171198130-9e0af9a9-9592-4367-a90f-0368ab68aeed.png">
 
-## Button for adding news only for user with 'ADMIN' authority
+# Application access for users with with 'ADMIN' authority
+
+## Adding news button in navbar
 <img width="348" alt="Screen Shot 2022-05-30 at 22 01 48" src="https://user-images.githubusercontent.com/50268957/171198263-06566389-da24-4936-8485-6cdced10afd6.png">
 
-## News adding
+## Delete and edit news
+<img width="774" alt="Screen Shot 2022-06-01 at 21 42 35" src="https://user-images.githubusercontent.com/73548162/171446220-fdefc9e4-df5e-431b-9117-5927e0419c02.png">
+
+## News adding & editing
 <img width="1440" alt="Screen Shot 2022-05-30 at 22 02 00" src="https://user-images.githubusercontent.com/50268957/171198512-acd39ada-d3a3-4951-9ee9-01dd9f75a2e0.png">
 
 
