@@ -9,6 +9,7 @@ App url: https://alatoo-news.herokuapp.com/
 <img width="1440" alt="Screen Shot 2022-05-30 at 21 59 49" src="https://user-images.githubusercontent.com/50268957/171194791-7dcc072b-e800-42a2-9083-8c31e65ef074.png">
 
 ## News comment section
+#### Only author of comment can delete it
 <img width="1440" alt="Screen Shot 2022-05-30 at 21 59 57" src="https://user-images.githubusercontent.com/50268957/171197440-54c1f49b-b1a0-40c7-845c-20f290632856.png">
 
 ## My profile page
