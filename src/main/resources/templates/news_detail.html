@@ -44,6 +44,9 @@
     <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/admin/delete_news/{id}(id = ${news.getId()})}">
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
+    <form sec:authorize="hasAuthority('ADMIN')" method="get" th:action="@{/admin/edit/{id}(id = ${news.getId()})}">
+        <button type="submit" class="btn btn-primary my-2">Edit news</button>
+    </form>
     <h1 id="title" th:text="${news.getTitle()}">Title</h1>
     <p id="date" th:text="${news.getDate()}">10.10.2022</p>
     <p id="content_text" th:text="${news.getContent()}">Text</p>

@@ -1,6 +1,7 @@
 package pro.aidar.alatoonews.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,8 @@ public class AdminController {
     public String editNews(
             @PathVariable Long id,
             Model model,
-            Principal principal
+            Principal principal,
+            @Value("${upload.location}") String uploadLocation
     ) {
         Optional<News> byId = newsService.findById(id);
         model.addAttribute("user", userService.findByUsername(principal.getName()));

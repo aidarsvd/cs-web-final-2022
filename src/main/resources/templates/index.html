@@ -48,6 +48,9 @@
         <form sec:authorize="hasAuthority('ADMIN')" th:method="delete" th:action="@{/admin/delete_news/{id}(id = ${item.getId()})}">
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        <form sec:authorize="hasAuthority('ADMIN')" method="get" th:action="@{/admin/edit/{id}(id = ${item.getId()})}">
+            <button type="submit" class="btn btn-primary my-2">Edit</button>
+        </form>
     </a>
 </div>
 
